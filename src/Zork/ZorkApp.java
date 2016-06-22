@@ -20,7 +20,7 @@ public class ZorkApp {
 	public static char response;
 	public static Report report;
 	public static List<String> userActivity ;
-	public static int indexList;
+	public static int indexList;  // index to userActivity list
 	public static Random rnd;
 	public static Integer nextRoom;	
 	
@@ -72,12 +72,8 @@ public class ZorkApp {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-			
-		
-		
-
 	}
+	
 	public static void updateReport(String message) {
 		
 		userActivity = report.getUserActivity();
@@ -85,6 +81,7 @@ public class ZorkApp {
 		report.setUserActivity(userActivity);
 		indexList++;
 	}
+	
 	public static char getPrompt (String moreText) {
 		System.out.println("You are standing in the " + currentRoom.getName());
 		System.out.println("You see "+currentRoom.getDesc());
@@ -138,10 +135,7 @@ public class ZorkApp {
 				nextRoom = -1;
 			} 
 		}
-		return nextRoom;
-		
-		
-		
+		return nextRoom;	
 	}
 
 	public static void history() {
