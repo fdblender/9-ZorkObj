@@ -3,8 +3,8 @@ import java.util.List;
 
 public class Report {
 	private List<String> userActivity = new ArrayList<String>();
-	private double totalWinnings;
-	private int roomCount;
+	private double totalWinnings=0;
+	private int roomCount=0;
 	public List<String> getUserActivity() {
 		return userActivity;
 	}

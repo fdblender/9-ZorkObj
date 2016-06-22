@@ -1,13 +1,13 @@
 import java.util.Map;
 
-class ZorkRooms{
+class ZorkRoom{
 	private int num;
 	private String name;
 	private String desc;
 	private int money;	
 	private Map<Character,Integer> goesTo;
 	
-	public ZorkRooms(int num, String name, String desc, int money, Map<Character,Integer> goesTo) {
+	public ZorkRoom(int num, String name, String desc, int money, Map<Character,Integer> goesTo) {
 		this.setNum(num);
 		this.name = name;
 		this.desc= desc;
