@@ -1,3 +1,4 @@
+package Zork;
 
 import java.util.HashMap;
 import java.util.List;
@@ -5,67 +6,75 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import FormatNumber.FormatNumberUtil;
+
 
 public class ZorkApp {
-	private static Map<Integer, ZorkRoom> listOfRooms;
-	static int thief;
-	static int lamp;
-	static boolean special = false;
-	static boolean lampFound = false;
-	static ZorkRoom currentRoom;
-	static Scanner in;
-	static char response;
-	static Report report;
-	static List<String> userActivity ;
-	static int indexList;
-	static Random rnd;
-	static Integer nextRoom;	
+	public static Map<Integer, ZorkRoom> listOfRooms;
+	public static int thief;
+	public static int lamp;
+	public static boolean special = false;
+	public static boolean lampFound = false;
+	public static ZorkRoom currentRoom;
+	public static Scanner in;
+	public static char response;
+	public static Report report;
+	public static List<String> userActivity ;
+	public static int indexList;
+	public static Random rnd;
+	public static Integer nextRoom;	
 	
 	public static void main(String[] args) {
-		initializeGame();
-		
-		rnd = new Random();
-		thief = rnd.nextInt(7) + 1;
-		lamp = rnd.nextInt(7) + 1;	
-		currentRoom = listOfRooms.get(nextRoom);
-		updateRoom();
-		
-		while (true) {	
-			if (currentRoom.getNum() == lamp && !lampFound) {								
-				response = getPrompt(" or Get Lamp 'L'");
-				updateReport("Received lamp");
-			} else if (currentRoom.getNum() == thief){
-				report.setTotalWinnings(0);
-				updateReport("Encountered thief");
-				System.out.println("Winnings: " + FormatNumberUtil.getFormattedCurrency( report.getTotalWinnings(),2));
-				response = getPrompt("");
-			} else if (currentRoom.getNum() == 3 && lampFound){				
-				response = getPrompt(" or Press 'R' to read scroll");
-			} else {
-				response = getPrompt("");
-			}
-						
-			if (response == 'N' || response == 'S' || response == 'W' || response == 'E' || response == 'R') {				
-				int roomIndex = getNextRoomIndex();
-				if (roomIndex != -1) {
-					System.out.println(nextRoom);
-					currentRoom = listOfRooms.get(nextRoom);
-					updateRoom();
-				}	
-				if (nextRoom == 9) {
-					System.out.println("Sorry! you lose");
-					break;
-				}
-			} else if (response == 'Q'){
-				break;
-			} else if (response == 'H') {
-				history();				
-			} else if (response == 'L') {
-				updateDescription();
-				lampFound = true;
-			}
+		try {
+			initializeGame();
 			
+			rnd = new Random();
+			thief = rnd.nextInt(7) + 1;
+			lamp = rnd.nextInt(7) + 1;	
+			currentRoom = listOfRooms.get(nextRoom);
+			updateRoom();
+			
+			while (true) {	
+				if (currentRoom.getNum() == lamp && !lampFound) {								
+					response = getPrompt(" or Get Lamp 'L'");
+					updateReport("Received lamp");
+				} else if (currentRoom.getNum() == thief){
+					report.setTotalWinnings(0);
+					updateReport("Encountered thief");
+					System.out.println("Winnings: " + FormatNumberUtil.getFormattedCurrency( report.getTotalWinnings(),2));
+					response = getPrompt("");
+				} else if (currentRoom.getNum() == 3 && lampFound){				
+					response = getPrompt(" or Press 'R' to read scroll");
+				} else {
+					response = getPrompt("");
+				}
+							
+				if (response == 'N' || response == 'S' || response == 'W' || response == 'E' || response == 'R') {				
+					int roomIndex = getNextRoomIndex();
+					if (roomIndex != -1) {
+						System.out.println(nextRoom);
+						currentRoom = listOfRooms.get(nextRoom);
+						updateRoom();
+					}	
+					if (nextRoom == 9) {
+						System.out.println("Sorry! you lose");
+						break;
+					}
+				} else if (response == 'Q'){
+					break;
+				} else if (response == 'H') {
+					history();				
+				} else if (response == 'L') {
+					updateDescription();
+					lampFound = true;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+		
+			
+		
 		
 
 	}
@@ -135,7 +144,7 @@ public class ZorkApp {
 		
 	}
 
-	private static void history() {
+	public static void history() {
 		for(String out: report.getUserActivity()) {
 			System.out.println(out);
 		}
@@ -143,7 +152,7 @@ public class ZorkApp {
 		System.out.println("Rooms visited: " + report.getRoomCount());
 	}
 
-	private static void updateDescription() {		
+	public static void updateDescription() {		
 		listOfRooms.get(1).setDesc(listOfRooms.get(1).getDesc() + " and a spider web of gold and silver");
 		listOfRooms.get(2).setDesc(listOfRooms.get(2).getDesc() + " and sheet music for Blank Space");
 		listOfRooms.get(3).setDesc(listOfRooms.get(3).getDesc() + " and a scroll on the wall");
@@ -155,7 +164,7 @@ public class ZorkApp {
 		
 	}
 
-	private static void initializeGame() {
+	public static void initializeGame() {
 		report = new Report();	
 		indexList = 0;
 		nextRoom = 1;

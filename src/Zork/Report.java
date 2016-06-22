@@ -1,8 +1,10 @@
-import java.util.ArrayList;
+package Zork;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class Report {
-	private List<String> userActivity = new ArrayList<String>();
+	private List<String> userActivity = new LinkedList<String>();
 	private double totalWinnings=0;
 	private int roomCount=0;
 	public List<String> getUserActivity() {

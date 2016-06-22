@@ -1,6 +1,7 @@
+package Zork;
 import java.util.Map;
 
-class ZorkRoom{
+public class ZorkRoom{
 	private int num;
 	private String name;
 	private String desc;
